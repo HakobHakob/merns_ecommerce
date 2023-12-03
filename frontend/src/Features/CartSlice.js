@@ -32,12 +32,21 @@ const cartSlice = createSlice({
       }
 
       // Adding items to localStorage
-      console.log("state.cartItems", state.cartItems)
       localStorage.setItem("cartItems", JSON.stringify(state.cartItems))
+    },
+
+    removeFromCart(state, action) {
+      const nextItems = state.cartItems.filter(
+        (cartItem) => cartItem.id !== action.payload.id
+      )
+      state.cartItems = nextItems
+      localStorage.setItem("cartItems", JSON.stringify(state.cartItems))
+
+      toast.error(`${action.payload.name} removed from cart`, toastTrueMsg)
     },
   },
 })
 
-export const { addToCart } = cartSlice.actions
+export const { addToCart, removeFromCart } = cartSlice.actions
 
 export default cartSlice.reducer

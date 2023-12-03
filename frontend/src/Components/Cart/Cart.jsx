@@ -1,9 +1,15 @@
 import { Link } from "react-router-dom"
 import * as Styled from "./Styled"
-import { useSelector } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
+import { removeFromCart } from "../../Features/CartSlice"
 
 export const Cart = () => {
   const cart = useSelector((state) => state.cart)
+  const dispatch = useDispatch()
+
+  const handleRemoveFromCart = (cartItem) => {
+    dispatch(removeFromCart(cartItem))
+  }
   return (
     <Styled.CartContainer>
       <Styled.CartContainerHeading>Shoping cart</Styled.CartContainerHeading>
@@ -43,7 +49,11 @@ export const Cart = () => {
                     <Styled.CartDescriptionText>
                       {cartItem.desc}
                     </Styled.CartDescriptionText>
-                    <Styled.CartRemove>Remove</Styled.CartRemove>
+                    <Styled.CartRemove
+                      onClick={() => handleRemoveFromCart(cartItem)}
+                    >
+                      Remove
+                    </Styled.CartRemove>
                   </Styled.CartDescription>
                 </Styled.CartProduct>
 
