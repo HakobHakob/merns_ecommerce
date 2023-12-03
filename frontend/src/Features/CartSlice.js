@@ -41,12 +41,32 @@ const cartSlice = createSlice({
       )
       state.cartItems = nextItems
       localStorage.setItem("cartItems", JSON.stringify(state.cartItems))
+      toast.error(`${action.payload.name}  removed from cart`, toastTrueMsg)
+    },
+    //increment or decrement product quantity in cart
+    decreaseCart(state, action) {
+      const itemIndex = state.cartItems.findIndex(
+        (cartItem) => cartItem.id === action.payload.id
+      )
 
-      toast.error(`${action.payload.name} removed from cart`, toastTrueMsg)
+      if (state.cartItems[itemIndex].cartTotalQuantity > 1) {
+        state.cartItems[itemIndex].cartTotalQuantity -= 1
+        toast.info(
+          `Decreased ${action.payload.name}  cart quantity`,
+          toastTrueMsg
+        )
+      } else if (state.cartItems[itemIndex].cartTotalQuantity === 1) {
+        const nextItems = state.cartItems.filter(
+          (cartItem) => cartItem.id !== action.payload.id
+        )
+        state.cartItems = nextItems
+        toast.error(`${action.payload.name}  removed from cart`, toastTrueMsg)
+      }
+      localStorage.setItem("cartItems", JSON.stringify(state.cartItems))
     },
   },
 })
 
-export const { addToCart, removeFromCart } = cartSlice.actions
+export const { addToCart, removeFromCart, decreaseCart } = cartSlice.actions
 
 export default cartSlice.reducer

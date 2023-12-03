@@ -1,15 +1,16 @@
 import { Link } from "react-router-dom"
 import * as Styled from "./Styled"
 import { useDispatch, useSelector } from "react-redux"
-import { removeFromCart } from "../../Features/CartSlice"
+import { addToCart, decreaseCart, removeFromCart } from "../../Features/CartSlice"
 
 export const Cart = () => {
   const cart = useSelector((state) => state.cart)
   const dispatch = useDispatch()
 
-  const handleRemoveFromCart = (cartItem) => {
-    dispatch(removeFromCart(cartItem))
-  }
+  const handleRemoveFromCart = (cartItem) => dispatch(removeFromCart(cartItem))
+  const handleDecreaseCart = (cartItem) => dispatch(decreaseCart(cartItem))
+  const handleIncreaseCart = (cartItem) => dispatch(addToCart(cartItem))
+
   return (
     <Styled.CartContainer>
       <Styled.CartContainerHeading>Shoping cart</Styled.CartContainerHeading>
@@ -62,11 +63,17 @@ export const Cart = () => {
                 </Styled.CartProductPrice>
 
                 <Styled.CartProductQuantity>
-                  <Styled.CartDecrement>-</Styled.CartDecrement>
+                  <Styled.CartDecrement
+                    onClick={() => handleDecreaseCart(cartItem)}
+                  >
+                    -
+                  </Styled.CartDecrement>
                   <Styled.CartCount>
                     {cartItem.cartTotalQuantity}
                   </Styled.CartCount>
-                  <Styled.CartIncrement>+</Styled.CartIncrement>
+                  <Styled.CartIncrement 
+                    onClick={() => handleIncreaseCart(cartItem)}
+                  >+</Styled.CartIncrement>
                 </Styled.CartProductQuantity>
 
                 <Styled.CartProductTotalPrice>
