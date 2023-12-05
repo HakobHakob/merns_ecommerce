@@ -1,7 +1,9 @@
+import { useSelector } from "react-redux"
 import * as Styled from "./Styled"
 import { Link } from "react-router-dom"
 
 export const NavBar = () => {
+  const { cartTotalQuantity } = useSelector((state) => state.cart)
   return (
     <Styled.NavBar>
       <Link to="/">
@@ -14,7 +16,7 @@ export const NavBar = () => {
             shopping_bag
           </Styled.BagSpan>
           <Styled.BagQuantitySpan>
-            <span>3</span>
+            <span>{cartTotalQuantity}</span>
           </Styled.BagQuantitySpan>
         </Styled.NavBag>
       </Link>
