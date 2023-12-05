@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom"
 import * as Styled from "./Styled"
 import { useDispatch, useSelector } from "react-redux"
-import { addToCart, decreaseCart, removeFromCart } from "../../Features/CartSlice"
+import { addToCart, clearCart, decreaseCart, removeFromCart } from "../../Features/CartSlice"
 
 export const Cart = () => {
   const cart = useSelector((state) => state.cart)
@@ -10,6 +10,7 @@ export const Cart = () => {
   const handleRemoveFromCart = (cartItem) => dispatch(removeFromCart(cartItem))
   const handleDecreaseCart = (cartItem) => dispatch(decreaseCart(cartItem))
   const handleIncreaseCart = (cartItem) => dispatch(addToCart(cartItem))
+  const handleClearCart = (cartItem) => dispatch(clearCart(cartItem))
 
   return (
     <Styled.CartContainer>
@@ -84,7 +85,9 @@ export const Cart = () => {
           </Styled.CartItems>
 
           <Styled.CartSummary>
-            <Styled.ClearCartBtn>Clear Cart</Styled.ClearCartBtn>
+            <Styled.ClearCartBtn
+            onClick={()=> handleClearCart()}>Clear Cart</Styled.ClearCartBtn>
+
             <Styled.CartCheckout>
               <Styled.CartSubtotal>
                 <Styled.CartSubtotalPrice>
