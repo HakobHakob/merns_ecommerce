@@ -1,11 +1,22 @@
 import { Link } from "react-router-dom"
 import * as Styled from "./Styled"
 import { useDispatch, useSelector } from "react-redux"
-import { addToCart, clearCart, decreaseCart, removeFromCart } from "../../Features/CartSlice"
+import {
+  addToCart,
+  clearCart,
+  decreaseCart,
+  getTotals,
+  removeFromCart,
+} from "../../Features/CartSlice"
+import { useEffect } from "react"
 
 export const Cart = () => {
   const cart = useSelector((state) => state.cart)
   const dispatch = useDispatch()
+
+  useEffect(() => {
+    dispatch(getTotals())
+  }, [cart, dispatch])
 
   const handleRemoveFromCart = (cartItem) => dispatch(removeFromCart(cartItem))
   const handleDecreaseCart = (cartItem) => dispatch(decreaseCart(cartItem))
@@ -72,9 +83,11 @@ export const Cart = () => {
                   <Styled.CartCount>
                     {cartItem.cartTotalQuantity}
                   </Styled.CartCount>
-                  <Styled.CartIncrement 
+                  <Styled.CartIncrement
                     onClick={() => handleIncreaseCart(cartItem)}
-                  >+</Styled.CartIncrement>
+                  >
+                    +
+                  </Styled.CartIncrement>
                 </Styled.CartProductQuantity>
 
                 <Styled.CartProductTotalPrice>
@@ -85,8 +98,9 @@ export const Cart = () => {
           </Styled.CartItems>
 
           <Styled.CartSummary>
-            <Styled.ClearCartBtn
-            onClick={()=> handleClearCart()}>Clear Cart</Styled.ClearCartBtn>
+            <Styled.ClearCartBtn onClick={() => handleClearCart()}>
+              Clear Cart
+            </Styled.ClearCartBtn>
 
             <Styled.CartCheckout>
               <Styled.CartSubtotal>
