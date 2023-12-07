@@ -42,7 +42,7 @@ export const CartEmpty = styled.div`
   margin: 10px 0;
   font-size: 20px;
   color: rgb(84, 84, 84);
-  margin:30px 0;
+  margin: 30px 0;
 `
 
 export const StartShoping = styled.div`
@@ -99,6 +99,7 @@ export const CartDescription = styled.div`
   display: flex;
   justify-content: space-between;
   flex-direction: column;
+  gap: 5px;
 `
 export const CartDesciptionHeading = styled.h3``
 export const CartDescriptionText = styled.p``
