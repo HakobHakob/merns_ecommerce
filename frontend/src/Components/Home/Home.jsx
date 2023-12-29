@@ -1,15 +1,18 @@
 import * as Styled from "./Styled"
 //Get our all products
 import { useGetAllProductsQuery } from "../../Features/ProductsAPI"
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { useNavigate } from "react-router-dom"
-
 import { addToCart } from "../../Features/CartSlice"
 
 export const Home = () => {
-  const { data, error, isLoading } = useGetAllProductsQuery()
+  const { items: products, status } = useSelector((state) => state.products)
+
   const dispatch = useDispatch()
   const navigate = useNavigate()
+
+  const { data, error, isLoading } = useGetAllProductsQuery()
+  console.log("Api", isLoading)
 
   const handleAddToCart = (product) => {
     dispatch(addToCart(product))

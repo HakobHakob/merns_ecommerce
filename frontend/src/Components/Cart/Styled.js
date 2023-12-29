@@ -201,6 +201,12 @@ export const CartCheckoutBtn = styled.button`
     background-color: #89d8d3;
   }
 `
+
+export const CartLoginBtn = styled(CartCheckoutBtn)`
+background-color: yellow;
+color: black;
+
+`
 export const ContinueShoping = styled.div`
   ${divMainStyle};
   align-items: unset;

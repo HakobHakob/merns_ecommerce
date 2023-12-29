@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import * as Styled from "./Styled"
 import { useDispatch, useSelector } from "react-redux"
 import {
@@ -13,6 +13,8 @@ import { useEffect } from "react"
 export const Cart = () => {
   const cart = useSelector((state) => state.cart)
   const dispatch = useDispatch()
+  const navigate = useNavigate()
+  const auth = useSelector((state) => state.auth)
 
   useEffect(() => {
     dispatch(getTotals())
@@ -115,7 +117,13 @@ export const Cart = () => {
                   Taxes and shipping calculated
                 </Styled.CartTotalMsg>
 
-                <Styled.CartCheckoutBtn>Check out</Styled.CartCheckoutBtn>
+                {auth._id ? (
+                  <Styled.CartCheckoutBtn>Check out</Styled.CartCheckoutBtn>
+                ) : (
+                  <Styled.CartLoginBtn onClick={()=>{
+                    navigate("/login")
+                  }}>Login to Check out</Styled.CartLoginBtn>
+                )}
 
                 <Styled.ContinueShoping>
                   <Link to="/">

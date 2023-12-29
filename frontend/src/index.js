@@ -7,10 +7,11 @@ import { Provider } from "react-redux"
 import store from "./store"
 import { productsFetch } from "./Features/ProductsSlice"
 import { getTotals } from "./Features/CartSlice"
-
+import { loadUser } from "./Features/AuthSlice"
 
 store.dispatch(productsFetch())
 store.dispatch(getTotals())
+store.dispatch(loadUser(null))
 
 const root = ReactDOM.createRoot(document.getElementById("root"))
 root.render(
