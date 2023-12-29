@@ -46,3 +46,16 @@ export const BagQuantitySpan = styled(SpanMainStyle)`
   font-weight: 700;
   color: black;
 `
+
+export const Logout = styled.div`
+  color: white;
+  cursor: pointer;
+`
+
+export const AuthLinks = styled.div`
+  a{
+    &:last-child{
+      margin-left: 2rem;
+    }
+  }
+`
